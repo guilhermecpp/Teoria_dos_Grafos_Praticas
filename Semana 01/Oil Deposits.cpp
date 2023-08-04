@@ -1,6 +1,6 @@
 // Link do problema: https://onlinejudge.org/index.php?option=onlinejudge&Itemid=8&page=show_problem&problem=513
 // Status - ACCEPTED
-// Comeplexidade - O(N + M)
+// Comeplexidade - O(NM)
 
 #include <bits/stdc++.h>
 using namespace std;       
@@ -18,7 +18,7 @@ int dcol[] = {-1,  0,  1, -1, 1, -1, 0, 1};
 // Esses dois vetores as combinações de todas as direções possíveis,
 // isso é, a alteração de linha e coluna em cada direção.
 
-void DFS(int lin, int col)
+void DFS(int lin, int col) 
 {
 	
 	int nlin, ncol, i;
@@ -124,7 +124,7 @@ int main()
 		// rodar várias DFS, porém cada vértice passará pela função
 		// somente uma vez, assim todo vértice (e por consequência 
 		// toda aresta) será analizado somente uma vez, ficando o 
-		// código assim com complexidade O(N + M) amortizado
+		// código assim com complexidade O(NM) amortizado
 		
 		cout << resp << endl;
 	
