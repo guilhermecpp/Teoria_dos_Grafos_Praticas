@@ -1,0 +1,43 @@
+Enunciado:
+
+Sam encontrou um monte de mapas do velho Meistre Aemon, que à primeira vista, deveriam apontar, cada um, a localização de um baú cheio de obsidiana. Porém, olhando melhor, alguns mapas apresentavam erros óbvios, enquanto outros, apenas enviando uma equipe de exploradores para saber. O que se sabe é que alguns mapas apontam para um local absurdo fora do mapa e alguns acabam em círculos, acabando por ser completamente inúteis. Como os mapas são muitos, os irmãos da Patrulha da Noite são poucos e o inverno está chegando, seu trabalho é escrever um programa para verificar se um mapa leva ou não a um baú com obsidiana.
+
+Os mapas têm estes recursos:
+	O ponto de partida está sempre no canto superior esquerdo.
+	Os mapas são retangulares e cada ponto do mapa possui um destes símbolos:
+	Um espaço de terreno atravessável.
+	Uma seta, representando uma possível mudança de direção.
+	Um baú.
+
+Uma vez que os locais que estes mapas descrevem são muito perigosos, é vital que o caminho descrito no mapa seja seguido à risca.
+
+Entrada: 
+	A primeira linha contém um inteiro positivo x < 100 com a largura do mapa.
+	A segunda linha contém um inteiro positivo y < 100 com a altura do mapa.
+	As linhas a seguir contêm vários caracteres dentro das dimensões do mapa.
+	Os caracteres válidos são:
+		Uma seta para a direita: >
+		Uma seta para a esquerda: <
+		Uma seta apontando para baixo: v
+		Uma seta apontando para cima: ^
+		Um espaço de terreno percorrível: .
+		Um baú: *
+Saída:
+	A saída deve consistir em uma única linha contendo um único caractere! ou *.
+	! significa que o mapa é inválido. * significa que o mapa é válido.
+
+Exemplo:
+
+Entrada:                  Saída:
+6                         *
+1
+>....*
+
+Entrada:                  Saída:
+7                         !
+5
+>.....v
+.......
+.......
+.......
+^.....<
