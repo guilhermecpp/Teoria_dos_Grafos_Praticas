@@ -1,0 +1,35 @@
+Considere-se com sorte! Considere-se sortudo por ainda estar respirando e se divertindo participando de
+este concurso. Mas tememos que muitos dos seus descendentes possam não ter esse luxo. Pois, como você
+sabemos, somos moradores de uma das cidades mais poluídas do planeta. A poluição está em toda parte, tanto 
+em no ambiente e na sociedade e a nossa falta de consciência está simplesmente a agravar a situação.
+
+Porém, por enquanto, consideraremos apenas um tipo de poluição – a poluição sonora. O o volume ou nível 
+de intensidade do som é geralmente medido em decibéis e o som tem nível de intensidade 130 decibéis ou mais 
+é considerado doloroso. O nível de intensidade de uma conversa normal é de 6.065 decibéis e o do tráfego 
+pesado é de 7.080 decibéis. Considere o seguinte mapa da cidade onde as arestas referem-se às ruas e os nós 
+referem-se aos cruzamentos. O número inteiro em cada borda é o nível médio de intensidade do som (em decibéis) 
+na rua correspondente.
+
+Para ir do cruzamento A ao cruzamento G poderá seguir o seguinte caminho: A-C-F-G. Nesse caso
+você deve ser capaz de tolerar uma intensidade sonora de até 140 decibéis. Para os caminhos A-B-E-G,
+A-B-D-G e A-C-F-D-G você deve tolerar respectivamente 90, 120 e 80 decibéis de intensidade sonora.
+Existem outros caminhos também. No entanto, está claro que A-C-F-D-G é o caminho mais confortável, uma vez que
+não exige que você tolere mais de 80 decibéis.
+Neste problema, dado um mapa da cidade, é necessário determinar o nível mínimo de intensidade sonora
+você deve ser capaz de tolerar para poder passar de uma determinada travessia para outra.
+
+Entrada: A entrada pode conter vários casos de teste.
+A primeira linha de cada caso de teste contém três inteiros C(≤ 100), S(≤ 1000) e Q(≤ 10000) onde
+C indica o número de cruzamentos (os cruzamentos são numerados usando números inteiros distintos variando de 1 a
+C), S representa o número de ruas e Q é o número de consultas.
+Cada uma das próximas S linhas contém três inteiros: c1, c2 e d indicando que o som médio
+o nível de intensidade na rua que liga os cruzamentos c1 e c2 (c1 ̸= c2) é d decibéis.
+Cada uma das próximas Q linhas contém dois inteiros c1 e c2 (c1 ̸= c2) solicitando o som mínimo
+nível de intensidade que você deve ser capaz de tolerar para passar do cruzamento c1 ao cruzamento c2.
+A entrada terminará com três zeros de C, S e Q.
+
+Saída: Para cada caso de teste na entrada, primeiro produza o número do caso de teste (começando em 1), conforme mostrado na
+saída de amostra. Então, para cada consulta na entrada, imprima uma linha fornecendo o nível mínimo de intensidade sonora
+(em decibéis) você deve ser capaz de tolerar para ir da primeira à segunda travessia no
+consulta. Se não existir nenhum caminho entre eles basta imprimir a linha “no path”.
+Imprima uma linha em branco entre dois casos de teste consecutivos.
