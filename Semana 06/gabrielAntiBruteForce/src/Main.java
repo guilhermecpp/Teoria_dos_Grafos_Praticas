@@ -20,10 +20,9 @@ public class Main {
         //for geral para passar por todos os n casos
         for(int i = 0; i < n; i++){
             //em todos os casos, lemos a quantidade de codigos a serem descritos
-            //cada código (inclusive) 0000 será um vértice do grafo
+
             s = 0;
             m = sc.nextInt();
-            m += 1;
             dic = new Code[m];//dicionario de codigos é iniciado com o tamanho igual a quantidade de codigos
 
             //iniciando grafo e vetores necessários
@@ -35,10 +34,8 @@ public class Main {
                 visited[x] = false;
             }
 
-            //adicionando 0000 como primeiro vetor
-            dic[0] = new Code();
             //guardando todos os m códigos escritos no dicionario
-            for(int j = 1; j < m; j++){
+            for(int j = 0; j < m; j++){
                 aux = sc.next();
                 dic[j] = new Code(aux);
             }
@@ -70,8 +67,16 @@ public class Main {
                     lPrior.addAll(adj[a.second]);
                 }
             }
-            results[i] = s;
+            //adicionamos agora uma aresta 0000 ao caminho
+            Code zero = new Code();
+            for(int g = 0; g < m; g++){
+                lPrior.add(new Dupla(zero.codeDist(dic[g]), 0));
+            }
+            //a menor aresta de 0000 ate um dos codigos digitados é somada ao resultado
+            results[i] = s + lPrior.poll().first;
+            lPrior.clear();
         }
+
 
         for(int i = 0; i < n; i++){
             System.out.println(results[i]);
