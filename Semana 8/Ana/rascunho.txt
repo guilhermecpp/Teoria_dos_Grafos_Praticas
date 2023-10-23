@@ -1,0 +1,237 @@
+/* Opção 1: chat
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
+
+class Main {
+    static class Edge {
+        int to;
+        int time;
+
+        public Edge(int to, int time) {
+            this.to = to;
+            this.time = time;
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        while (true) {
+            String[] line = br.readLine().split(" ");
+            if (line.length < 4) break;
+
+            int N = Integer.parseInt(line[0]);
+            int M = Integer.parseInt(line[1]);
+            int B = Integer.parseInt(line[2]);
+            int P = Integer.parseInt(line[3]);
+
+            List<List<Edge>> graph = new ArrayList<>(N);
+            for (int i = 0; i < N; i++) {
+                graph.add(new ArrayList<>());
+            }
+
+            for (int i = 0; i < M; i++) {
+                line = br.readLine().split(" ");
+                int U = Integer.parseInt(line[0]);
+                int V = Integer.parseInt(line[1]);
+                int T = Integer.parseInt(line[2]);
+                graph.get(U).add(new Edge(V, T));
+                graph.get(V).add(new Edge(U, T));
+            }
+
+            line = br.readLine().split(" ");
+            Set<Integer> banks = new HashSet<>();
+            for (int i = 0; i < B; i++) {
+                banks.add(Integer.parseInt(line[i]);
+            }
+
+            line = br.readLine().split(" ");
+            Set<Integer> policeStations = new HashSet<>();
+            for (int i = 0; i < P; i++) {
+                policeStations.add(Integer.parseInt(line[i]);
+            }
+
+            int maxDistance = Integer.MIN_VALUE;
+            List<Integer> selectedBanks = new ArrayList<>();
+
+            for (int policeStation : policeStations) {
+                int[] distances = new int[N];
+                Arrays.fill(distances, Integer.MAX_VALUE);
+                distances[policeStation] = 0;
+                PriorityQueue<Integer> queue = new PriorityQueue<>(Comparator.comparingInt(node -> distances[node]));
+                queue.add(policeStation);
+
+                while (!queue.isEmpty()) {
+                    int current = queue.poll();
+                    for (Edge edge : graph.get(current)) {
+                        int next = edge.to;
+                        int time = edge.time;
+                        if (distances[current] + time < distances[next]) {
+                            distances[next] = distances[current] + time;
+                            queue.add(next);
+                        }
+                    }
+                }
+
+                for (int bank : banks) {
+                    if (distances[bank] > maxDistance) {
+                        maxDistance = distances[bank];
+                        selectedBanks.clear();
+                        selectedBanks.add(bank);
+                    } else if (distances[bank] == maxDistance) {
+                        selectedBanks.add(bank);
+                    }
+                }
+            }
+
+            Collections.sort(selectedBanks);
+
+            if (maxDistance == Integer.MAX_VALUE) {
+                System.out.println("*");
+            } else {
+                System.out.println(selectedBanks.size() + " " + maxDistance);
+                for (int bank : selectedBanks) {
+                    System.out.print(bank + " ");
+                }
+                System.out.println();
+            }
+        }
+    }
+}
+
+ */
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+ /* Opção 2: bard
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int n = scanner.nextInt();
+        int m = scanner.nextInt();
+        int b = scanner.nextInt();
+        int p = scanner.nextInt();
+
+        Graph graph = new Graph(n);
+
+        for (int i = 0; i < m; i++) {
+            int u = scanner.nextInt();
+            int v = scanner.nextInt();
+            int t = scanner.nextInt();
+
+            graph.addEdge(u, v, t);
+        }
+
+        List<Integer> policeStations = new ArrayList<>();
+        List<Integer> banks = new ArrayList<>();
+
+        for (int i = 0; i < p; i++) {
+            policeStations.add(scanner.nextInt());
+        }
+
+        for (int i = 0; i < b; i++) {
+            banks.add(scanner.nextInt());
+        }
+
+        int[] distances = new int[n];
+
+        for (int policeStation : policeStations) {
+            singleSourceShortestPath(graph, policeStation, distances);
+        }
+
+        int maxDistance = 0;
+        List<Integer> farthestBanks = new ArrayList<>();
+
+        for (int bank : banks) {
+            int minDistance = Integer.MAX_VALUE;
+
+            for (int i = 0; i < n; i++) {
+                minDistance = Math.min(minDistance, distances[i]);
+            }
+
+            if (minDistance > maxDistance) {
+                maxDistance = minDistance;
+                farthestBanks.clear();
+                farthestBanks.add(bank);
+            } else if (minDistance == maxDistance) {
+                farthestBanks.add(bank);
+            }
+        }
+
+        System.out.println(farthestBanks.size() + " " + maxDistance);
+
+        for (int farthestBank : farthestBanks) {
+            System.out.print(farthestBank + " ");
+        }
+
+        System.out.println();
+    }
+
+    private static void singleSourceShortestPath(Graph graph, int source, int[] distances) {
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(source);
+
+        Arrays.fill(distances, Integer.MAX_VALUE);
+        distances[source] = 0;
+
+        while (!queue.isEmpty()) {
+            int currentNode = queue.poll();
+
+            for (Edge edge : graph.getEdges(currentNode)) {
+                int newDistance = distances[currentNode] + edge.getWeight();
+
+                if (newDistance < distances[edge.getDestination()]) {
+                    distances[edge.getDestination()] = newDistance;
+                    queue.add(edge.getDestination());
+                }
+            }
+        }
+    }
+
+    private static class Graph {
+        private List<List<Edge>> edges;
+
+        public Graph(int n) {
+            this.edges = new ArrayList<>(n);
+
+            for (int i = 0; i < n; i++) {
+                this.edges.add(new ArrayList<>());
+            }
+        }
+
+        public void addEdge(int u, int v, int t) {
+            this.edges.get(u).add(new Edge(v, t));
+            this.edges.get(v).add(new Edge(u, t));
+        }
+
+        public List<Edge> getEdges(int node) {
+            return this.edges.get(node);
+        }
+    }
+
+    private static class Edge {
+        private int destination;
+        private int weight;
+
+        public Edge(int destination, int weight) {
+            this.destination = destination;
+            this.weight = weight;
+        }
+
+        public int getDestination() {
+            return this.destination;
+        }
+
+        public int getWeight() {
+            return this.weight;
+        }
+    }
+}
+
+ */
